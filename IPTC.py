@@ -68,6 +68,7 @@ def RunSuri():
         os.popen('sudo kill ' + value + '')
         RunSuri()
     except  subprocess.CalledProcessError:
+        os.popen('sudo iptables -I FORWARD -j NFQUEUE --queue-num 0')
         os.popen('suricata -c /home/suricata.yaml -S /home/suricara.rules -q 0 &')
 
 if __name__== "__main__":
