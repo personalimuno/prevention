@@ -21,7 +21,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         oldRules = subprocess.check_output(["sudo","iptables","-D","FORWARD","1"])
         MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
-        os.popen('sudo iptables -I FORWARD -j NFQUEUE --queue-num 0')
+        os.popen('sudo iptables -I FORWARD -g NFQUEUE')
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain)
         rule = iptc.Rule()
         rule.in_interface = ifin
@@ -73,7 +73,7 @@ def RunSuri():
 
 if __name__== "__main__":
     Opening()
-    chain = "FORWARD"
+    chain = "IPS"
     homenet = raw_input("1. Homenet: ")
     extnet = raw_input("2. Extnet: ")
     inif = raw_input("3. Interface input: ")
