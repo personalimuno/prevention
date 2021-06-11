@@ -21,6 +21,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         oldRules = subprocess.check_output(["sudo","iptables","-D","FORWARD","1"])
         MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
+        os.popen('sudo iptables -I FORWARD -j NFQUEUE --queue-num 0')
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain)
         rule = iptc.Rule()
         rule.in_interface = ifin
@@ -68,7 +69,6 @@ def RunSuri():
         os.popen('sudo kill ' + value + '')
         RunSuri()
     except  subprocess.CalledProcessError:
-        os.popen('sudo iptables -I FORWARD -j NFQUEUE --queue-num 0')
         os.popen('suricata -c /home/suricata.yaml -S /home/suricara.rules -q 0 &')
 
 if __name__== "__main__":
