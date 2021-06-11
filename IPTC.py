@@ -19,7 +19,7 @@ def MakeChain(chain):
 def MakeIPTC(chain, home, ext, ifin, ifout):
     try:
         oldRules = subprocess.check_output(["sudo","iptables","-D","FORWARD","1"])
-        MakeChain(chain, home, ext, ifin, ifout)
+        MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain)
         rule = iptc.Rule()
