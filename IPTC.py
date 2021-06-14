@@ -31,7 +31,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         rule.protocol = "tcp"
         match = iptc.Match(rule, "tcp")
         match.dport = "80"
-        match.sport = "49100:"
+#        match.sport = "49100:"
         rule.add_match(match)
         rule.target = iptc.Target(rule, "NFQUEUE")
         chain.insert_rule(rule)
