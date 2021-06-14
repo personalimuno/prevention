@@ -58,7 +58,7 @@ def SuriConf(homenet):
 def CreatRules():
     bag1 = 'drop tcp $EXTERNAL_NET [49100:] -> $HOME_NET 80 '
     bag2 = '(flags: S; ack: 0; window: 8192; flow: to_server; detection_filter: track by_dst, count 20, seconds 10;'
-    bag3 = ' classtype: attemted-dos; msg:"Possible DDoS Attack - SYNFlood"; sid:10000001;)'
+    bag3 = ' classtype: attempted-dos; msg:"Possible DDoS Attack - SYNFlood"; sid:10000001;)'
     f = open("/etc/suricata/rules/suricata.rules", "w")
     f.write(bag1 + bag2 + bag3)
     f.close()
