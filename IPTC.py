@@ -37,8 +37,8 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         chain.insert_rule(rule)
 
 def SuriConf(homenet):
-    os.popen('sudo cp /etc/suricata/suricata.yaml /home/')
-    filenames = ['/home/suricata.yaml']
+    #os.popen('sudo cp /etc/suricata/suricata.yaml /home/')
+    filenames = ['/etc/suricata/suricata.yaml']
     
     for line in fileinput.input(filenames, inplace=True):
         print line.replace('HOME_NET: "[', '#HOME_NET: "['),
@@ -54,12 +54,12 @@ def SuriConf(homenet):
 
     for line in fileinput.input(filenames, inplace=True):
         print line.replace('- suricata.rules', '#- suricata.rules'),
-
+        
 def CreatRules():
-    bag1 = 'drop tcp $EXTERNAL_NET [49100:] <> $HOME_NET 80 '
+    bag1 = 'drop tcp $EXTERNAL_NET [49100:] -> $HOME_NET 80 '
     bag2 = '(flags: S; ack: 0; window: 8192; flow: to_server; detection_filter: track by_dst, count 20, seconds 10;'
     bag3 = ' classtype: attemted-dos; msg:"Possible DDoS Attack - SYNFlood"; sid:10000001;)'
-    f = open("/home/suricata.rules", "w")
+    f = open("/etc/suricata/rules/suricata.rules", "w")
     f.write(bag1 + bag2 + bag3)
     f.close()
 
@@ -69,7 +69,7 @@ def RunSuri():
         os.popen('sudo kill ' + value + '')
         RunSuri()
     except  subprocess.CalledProcessError:
-        os.popen('suricata -c /home/suricata.yaml -S /home/suricara.rules -q 0 &')
+        os.popen('suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricara.rules -q 0 &')
 
 if __name__== "__main__":
     Opening()
