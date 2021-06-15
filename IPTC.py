@@ -22,7 +22,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
 #        os.popen('sudo iptables -I FORWARD -g IPS')
-        chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain)
+        chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
         rule = iptc.Rule()
         rule.in_interface = ifin
         rule.out_interface = ifout
@@ -70,6 +70,8 @@ def RunSuri():
         RunSuri()
     except  subprocess.CalledProcessError:
         os.popen('suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricara.rules -q 0')
+        id = os.popen('pidof suricata')
+        print(id)
 
 if __name__== "__main__":
     Opening()
