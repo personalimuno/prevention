@@ -21,7 +21,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         oldRules = subprocess.check_output(["sudo","iptables","-D","FORWARD","1"])
         MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
-        os.popen('sudo iptables -I FORWARD -g IPS')
+#        os.popen('sudo iptables -I FORWARD -g IPS')
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain)
         rule = iptc.Rule()
         rule.in_interface = ifin
@@ -31,7 +31,7 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         rule.protocol = "tcp"
         match = iptc.Match(rule, "tcp")
         match.dport = "80"
-#        match.sport = "49100:"
+        match.sport = "49100:"
         rule.add_match(match)
         rule.target = iptc.Target(rule, "NFQUEUE")
         chain.insert_rule(rule)
@@ -69,11 +69,11 @@ def RunSuri():
         os.popen('sudo kill ' + value + '')
         RunSuri()
     except  subprocess.CalledProcessError:
-        os.popen('suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricara.rules -q 0 &')
+        os.popen('suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricara.rules -q 0')
 
 if __name__== "__main__":
     Opening()
-    chain = "IPS"
+    chain = "FORWARD"
     homenet = raw_input("1. Homenet: ")
     extnet = raw_input("2. Extnet: ")
     inif = raw_input("3. Interface input: ")
