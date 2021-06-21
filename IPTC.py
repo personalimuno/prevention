@@ -4,12 +4,11 @@ def Opening():
     print("==============================================================================")
     print("^===                   IPS Configuration - SynFlood                       ===^")
     print("============================================================================= ")
-    print("= 1. Chain is used to forwarding packet (whatever you want to name it)       =")
-    print("= 2. Homenet is the network that need to be protected (Ex. 192.168.1.0/24)   =")
-    print("= 3. Extnet is which network need to filtered (Leave it 0.0.0.0/0, if        =")
+    print("= 1. Homenet is the network that need to be protected (Ex. 192.168.1.0/24)   =")
+    print("= 2. Extnet is which network need to filtered (Leave it 0.0.0.0/0, if        =")
     print("=    you're not sure)                                                        =")
-    print("= 4. Interface input is the device of Extnet (check ifconfig)                =")
-    print("= 5. Interface Output is the device of Homenet (check ifconfig)              =")
+    print("= 3. Interface input is the device of Extnet (check ifconfig)                =")
+    print("= 4. Interface Output is the device of Homenet (check ifconfig)              =")
     print("==============================================================================")
 
 def MakeChain(chain):
