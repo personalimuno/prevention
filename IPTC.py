@@ -68,7 +68,7 @@ def RunSuri():
         os.popen('sudo kill ' + value + '')
         RunSuri()
     except  subprocess.CalledProcessError:
-        os.popen('sudo suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricata.rules -l /home/pentes/Desktop/ -q 0')
+        os.popen('sudo suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricata.rules -l /home/pentes/Desktop/ -q 0 -D')
 
 if __name__== "__main__":
     Opening()
