@@ -66,6 +66,7 @@ def RunSuri():
     try:
         value = subprocess.check_output(["pidof","suricata"])
         os.popen('sudo kill ' + value + '')
+        os.popen('sudo rm -rf /var/run/suricata.pid')
         RunSuri()
     except  subprocess.CalledProcessError:
         os.popen('sudo suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricata.rules -l /home/pentes/Desktop/ -q 0 -D')
