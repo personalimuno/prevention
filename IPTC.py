@@ -86,11 +86,11 @@ if __name__== "__main__":
         MakeChain(chain)
         MakeIPTC(chain, homenet, extnet, inif,outif)
         SuriConf(homenet)
-        CreatRules()
+        CreatRules(homenet, extnet)
         RunSuri()
 
     elif tab == True:
         MakeIPTC(chain, homenet, extnet, inif, outif)
         SuriConf(homenet)
-        CreatRules()
+        CreatRules(homenet, extnet)
         RunSuri()
