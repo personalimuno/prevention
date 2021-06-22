@@ -54,10 +54,10 @@ def SuriConf(homenet):
     for line in fileinput.input(filenames, inplace=True):
         print line.replace('- suricata.rules', '#- suricata.rules'),
         
-def CreatRules():
-    bag1 = 'drop tcp $EXTERNAL_NET [49100:] -> $HOME_NET 80 '
-    bag2 = '(flags: S; ack: 0; window: 8192; flow: to_server; detection_filter: track by_dst, count 20, seconds 10;'
-    bag3 = ' classtype: attempted-dos; msg:"Possible DDoS Attack - SYNFlood"; sid:10000001;)'
+def CreatRules(homenet, extnet):
+    bag1 = 'drop tcp '+ extnet +' [49100:] -> '+ homenet +' 80 (flags: S; ack: 0; window: 8192; '
+    bag2 = 'flow: to_server; detection_filter: track by_dst, count 20, seconds 10; '
+    bag3 = 'classtype: attempted-dos; msg:"Possible DDoS Attack - SYNFlood"; sid:10000001;)'
     f = open("/etc/suricata/rules/suricata.rules", "w")
     f.write(bag1 + bag2 + bag3)
     f.close()
