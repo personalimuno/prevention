@@ -69,8 +69,6 @@ def RunSuri():
         RunSuri()
     except  subprocess.CalledProcessError:
         os.popen('suricata -c /etc/suricata/suricata.yaml -S /etc/suricata/rules/suricara.rules -l /home/ -q 0 -D')
-        os.popen('pidof suricata')
-        os.popen('sudo tail -f /home/fast.log')
 
 if __name__== "__main__":
     Opening()
