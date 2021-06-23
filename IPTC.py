@@ -20,7 +20,6 @@ def MakeIPTC(chain, home, ext, ifin, ifout):
         oldRules = subprocess.check_output(["sudo","iptables","-D","FORWARD","1"])
         MakeIPTC(chain, home, ext, ifin, ifout)
     except  subprocess.CalledProcessError:
-#        os.popen('sudo iptables -I FORWARD -g IPS')
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "FORWARD")
         rule = iptc.Rule()
         rule.in_interface = ifin
